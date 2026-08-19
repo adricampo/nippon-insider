@@ -65,7 +65,7 @@ export default function ResourceBox() {
           Lo básico para tu viaje a Japón
         </p>
         <p className="mt-0.5 text-xs text-sumi/55">
-          Lo que reservo yo mismo antes de cada vuelta, resumido en una lista.
+          Lo esencial para organizar el viaje, resumido en una lista.
         </p>
       </div>
       <ul className="grid divide-y divide-sumi/8 sm:grid-cols-2 sm:divide-x sm:divide-y-0">

@@ -1,48 +1,62 @@
 import { AFFILIATES } from "@contracts/affiliates";
-import { ArrowRight, Train } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { trackAffiliateClick } from "@/lib/affiliateTracking";
+import { affiliateIcon } from "@/lib/affiliateIcons";
 
-// Banner grande de afiliado, integrado en el flujo de lectura.
-// Se renderiza desde shortcodes tipo [BANNER_JRPASS].
+// Banner grande de afiliado, integrado en el flujo de lectura. Se
+// renderiza desde shortcodes tipo [BANNER_JRPASS]. Mismo motivo de
+// billete que ProductCard, a mayor escala: toda la tarjeta es clicable
+// y el precio/CTA viven en el talón recortado a la derecha.
 export default function AffiliateBanner({ code }: { code: string }) {
   const def = AFFILIATES[code];
   if (!def) return null;
 
   const isInternal = def.url.startsWith("/");
-  const Icon = Train;
+  const Icon = affiliateIcon(code);
 
   return (
-    <aside className="not-prose my-8 overflow-hidden rounded-lg border border-aka/20 bg-gradient-to-br from-washi to-accent shadow-sm">
-      <div className="flex flex-col gap-4 p-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-aka/10">
-            <Icon className="h-6 w-6 text-aka" />
-          </div>
+    <a
+      href={def.url}
+      target={isInternal ? undefined : "_blank"}
+      rel={isInternal ? undefined : "noopener noreferrer sponsored"}
+      onClick={() => trackAffiliateClick(code, "banner")}
+      className="not-prose group relative my-8 grid grid-cols-[1fr_auto] overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+    >
+      <div className="flex items-start gap-4 p-6 sm:p-7">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-aka/10">
+          <Icon className="h-7 w-7 text-aka" />
         </div>
-        <div>
-          <h4 className="font-serif text-xl font-semibold text-sumi">
+        <div className="min-w-0">
+          <h4 className="font-serif text-2xl font-semibold text-sumi">
             {def.title}
           </h4>
-          <p className="mt-1 text-sm leading-relaxed text-sumi/70">
+          <p className="mt-1.5 text-sm leading-relaxed text-sumi/70">
             {def.description}
           </p>
-          {def.priceHint && (
-            <p className="mt-1 text-xs font-medium text-kin">{def.priceHint}</p>
-          )}
+          <p className="mt-3 text-[11px] text-sumi/45">
+            Enlace de afiliado — apoyas este blog sin coste adicional.
+          </p>
         </div>
-        <a
-          href={def.url}
-          target={isInternal ? undefined : "_blank"}
-          rel={isInternal ? undefined : "noopener noreferrer sponsored"}
-          onClick={() => trackAffiliateClick(code, "banner")}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-aka px-5 py-2.5 text-sm font-semibold text-washi transition-colors hover:bg-aka-dark"
-        >
-          {def.cta} <ArrowRight className="h-4 w-4" />
-        </a>
       </div>
-      <p className="border-t border-aka/10 bg-aka/5 px-6 py-1.5 text-[10px] text-sumi/50">
-        Enlace de afiliado — apoyas este blog sin coste adicional.
-      </p>
-    </aside>
+      <div className="relative flex w-32 shrink-0 flex-col items-center justify-center gap-2 border-l-2 border-dashed border-washi/40 bg-aka px-3 py-4 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44">
+        <span
+          aria-hidden
+          className="absolute -left-[9px] -top-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+        />
+        <span
+          aria-hidden
+          className="absolute -bottom-[9px] -left-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+        />
+        {def.priceHint && (
+          <span className="font-serif text-lg font-bold leading-tight sm:text-xl">
+            {def.priceHint}
+          </span>
+        )}
+        <span className="inline-flex items-center gap-1.5 text-sm font-bold">
+          {def.cta}
+          <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </div>
+    </a>
   );
 }

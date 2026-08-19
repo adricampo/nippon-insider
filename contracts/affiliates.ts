@@ -44,7 +44,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     description:
       "Trenes ilimitados por todo Japón, incluido el shinkansen. Se amortiza con un solo Tokyo–Kioto ida y vuelta.",
     url: "https://www.jrailpass.com/es?aff=NIPPONINSIDER",
-    cta: "Comprar el JR Pass",
+    cta: "Comprar JR Pass",
     badge: "CPS · Comisión por venta",
     priceHint: "Desde 50.000 ¥ / 7 días",
     category: "transporte",
@@ -56,7 +56,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     description:
       "Recógelo en el aeropuerto de Narita o Haneda y olvídate del roaming: conexión estable durante todo el viaje sin depender del wifi de cada sitio.",
     url: "https://www.sakuramobile.jp/?aff=NIPPONINSIDER",
-    cta: "Reservar WiFi portátil",
+    cta: "Reservar WiFi",
     badge: "CPL · Lead cualificado",
     priceHint: "≈ 900 ¥/día",
   },
@@ -67,7 +67,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     description:
       "Actívala antes de despegar y aterriza con datos. Sin colas en el aeropuerto ni tarjetas físicas.",
     url: "https://www.mobal.com/japan-sim-card/?aff=NIPPONINSIDER",
-    cta: "Ver planes de eSIM",
+    cta: "Ver planes eSIM",
     badge: "CPS · Comisión por venta",
     priceHint: "Desde 2.980 ¥",
     category: "conectividad",
@@ -103,11 +103,11 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
   PRODUCT_KLOOK_TOURS: {
     code: "PRODUCT_KLOOK_TOURS",
     kind: "product",
-    title: "Billete de metro de Tokio con Klook",
+    title: "Billete de metro de Tokio",
     description:
       "Canje directo desde el móvil, sin colas en las máquinas expendedoras: acceso a la red de metro de Tokio los días que necesites.",
     url: "https://affiliate.klook.com/redirect?aid=131827&aff_adid=1392890&k_site=https%3A%2F%2Fwww.klook.com%2Fes%2Factivity%2F1552-subway-ticket-tokyo",
-    cta: "Ver el billete en Klook",
+    cta: "Ver en Klook",
     badge: "CPS · Comisión por reserva",
     category: "transporte",
   },
@@ -118,7 +118,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     description:
       "Entrada a una exhibición de sumo en un club de Asakusa, con degustación de chankonabe incluida — el guiso tradicional con el que se alimentan los luchadores.",
     url: "https://affiliate.klook.com/redirect?aid=131827&aff_adid=1392893&k_site=https%3A%2F%2Fwww.klook.com%2Fes%2Factivity%2F109994-asakusa-sumo-club-sumo-show-admission-chankonabe-tokyo",
-    cta: "Reservar la experiencia",
+    cta: "Reservar",
     badge: "CPS · Comisión por reserva",
     category: "tours",
   },
@@ -137,7 +137,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     title: "Equipo de viaje recomendado",
     description: "Adaptador de corriente, power bank y mochila pensados para aguantar de la humedad de Tokio a la nieve de Hokkaido.",
     url: "https://www.amazon.es/shop/nipponinsider?tag=NIPPONINSIDER",
-    cta: "Ver la lista en Amazon",
+    cta: "Ver en Amazon",
     badge: "CPS · Comisión por venta",
   },
   LINK_SKYSCANNER_VUELOS: {
@@ -156,7 +156,7 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     title: "Seguro de viaje con cobertura médica",
     description: "En Japón la sanidad privada es excelente pero cara: un buen seguro se amortiza con una sola visita a urgencias.",
     url: "https://www.intermundial.es/seguros-de-viaje?prom=NIPPONINSIDER",
-    cta: "Calcular mi seguro",
+    cta: "Calcular seguro",
     badge: "CPS · Comisión por póliza",
     category: "seguro",
   },
