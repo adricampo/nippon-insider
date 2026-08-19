@@ -8,7 +8,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 export default function Home() {
   usePageMeta(
     "Nippon Insider — Japón, desde dentro",
-    "Blog en español sobre Japón: turismo, economía, cultura y mercado inmobiliario, escrito por un expatriado en Tokio.",
+    "Blog en español sobre Japón: turismo, economía, cultura y mercado inmobiliario, con guías prácticas y datos contrastados.",
   );
 
   const [params, setParams] = useSearchParams();
@@ -44,7 +44,7 @@ export default function Home() {
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-washi/80 md:text-lg">
             Turismo, economía, cultura y mercado inmobiliario. Sin tópicos,
-            con datos contrastados y diez años de vida en Tokio a la espalda.
+            con datos contrastados y guías pensadas para que decidas con información real.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
