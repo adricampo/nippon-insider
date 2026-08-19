@@ -105,3 +105,15 @@ export function registerSeoRoutes(app: App, distPath: string) {
     );
   });
 }
+
+// Respaldo para rutas puramente de cliente (/admin, /login, /aviso-legal...)
+// que no tienen metadatos propios que inyectar: sirve el index.html base
+// para que React Router tome el control. Regístrala la última, después de
+// registerSeoRoutes y de cualquier servido de estáticos — en Vercel, donde
+// no hay servidor de estáticos propio, es el único "catch-all" del sitio.
+export function registerSpaFallback(app: App, distPath: string) {
+  app.get("*", (c) => {
+    const html = fs.readFileSync(path.resolve(distPath, "index.html"), "utf-8");
+    return c.html(html);
+  });
+}

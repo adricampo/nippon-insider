@@ -13,7 +13,7 @@ export const env = {
   appSecret: required("APP_SECRET"),
   // Contraseña del único acceso de administrador (sin OAuth ni cuentas
   // de terceros). Compárala siempre con verifyAdminPassword() en
-  // api/auth/login.ts, nunca directamente.
+  // server/auth/login.ts, nunca directamente.
   adminPassword: required("ADMIN_PASSWORD"),
   isProduction: process.env.NODE_ENV === "production",
   databaseUrl: required("DATABASE_URL"),

@@ -9,7 +9,7 @@
 export type Category = "turismo" | "economia" | "cultura" | "inmobiliaria";
 
 // Búsqueda de respaldo en Pexels cuando no hay una query más específica
-// para el artículo (ver findCoverImage en api/lib/pexels.ts).
+// para el artículo (ver findCoverImage en server/lib/pexels.ts).
 export const CATEGORY_COVER_QUERY: Record<Category, string> = {
   turismo: "Japan travel tourism",
   economia: "Tokyo business finance",

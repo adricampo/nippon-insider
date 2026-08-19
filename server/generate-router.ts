@@ -4,7 +4,7 @@ import { generatePost, listPoolStatus } from "./content-engine";
 
 // Motor de generación: solo administradores desde la UI.
 // El cron externo (Vercel Cron / GitHub Actions / cron del servidor)
-// llama al endpoint HTTP /api/cron/generate-post (ver api/boot.ts).
+// llama al endpoint HTTP /api/cron/generate-post (ver server/app.ts).
 export const generateRouter = createRouter({
   run: adminQuery
     .input(

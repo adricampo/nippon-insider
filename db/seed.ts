@@ -1,4 +1,4 @@
-import { getDb } from "../api/queries/connection";
+import { getDb } from "../server/queries/connection";
 import { posts } from "./schema";
 
 function daysAgo(n: number): Date {

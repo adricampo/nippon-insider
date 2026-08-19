@@ -4,7 +4,7 @@ import { useEffect } from "react";
 // dentro de la SPA (React Router no recarga el documento, así que sin esto
 // el título se queda congelado en el de la primera página cargada).
 // El servidor ya inyecta los valores correctos en la carga inicial para
-// crawlers y previsualizaciones sociales — ver api/lib/seo-routes.ts.
+// crawlers y previsualizaciones sociales — ver server/lib/seo-routes.ts.
 export function usePageMeta(title: string, description?: string) {
   useEffect(() => {
     document.title = title;

@@ -64,7 +64,7 @@ interface SourceItem {
   sourceName: string;
   sourceUrl: string;
   // Término de búsqueda en Pexels para la foto de portada real (ver
-  // findCoverImage en api/lib/pexels.ts). Sin PEXELS_API_KEY configurada,
+  // findCoverImage en server/lib/pexels.ts). Sin PEXELS_API_KEY configurada,
   // se usa el glifo de categoría como marcador de posición.
   coverQuery: string;
   headline: string; // título SEO final
