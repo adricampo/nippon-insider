@@ -28,7 +28,10 @@ export interface AffiliateDef {
   description: string;
   url: string;
   cta: string;
-  badge?: string; // ej. "CPS · 5% comisión"
+  // Metadato interno (modelo de comisión: CPS/CPL) — ya no se muestra en la
+  // web, es jerga de marketing de afiliados que no aporta nada al lector.
+  // Se conserva aquí solo como referencia tuya.
+  badge?: string;
   priceHint?: string;
   category?: AffiliateCategory;
 }
@@ -107,6 +110,17 @@ export const AFFILIATES: Record<string, AffiliateDef> = {
     cta: "Ver el billete en Klook",
     badge: "CPS · Comisión por reserva",
     category: "transporte",
+  },
+  PRODUCT_KLOOK_SUMO: {
+    code: "PRODUCT_KLOOK_SUMO",
+    kind: "product",
+    title: "Exhibición de sumo con chankonabe en Asakusa",
+    description:
+      "Entrada a una exhibición de sumo en un club de Asakusa, con degustación de chankonabe incluida — el guiso tradicional con el que se alimentan los luchadores.",
+    url: "https://affiliate.klook.com/redirect?aid=131827&aff_adid=1392893&k_site=https%3A%2F%2Fwww.klook.com%2Fes%2Factivity%2F109994-asakusa-sumo-club-sumo-show-admission-chankonabe-tokyo",
+    cta: "Reservar la experiencia",
+    badge: "CPS · Comisión por reserva",
+    category: "tours",
   },
   PRODUCT_GETYOURGUIDE: {
     code: "PRODUCT_GETYOURGUIDE",

@@ -18,11 +18,6 @@ export default function ProductCard({ code }: { code: string }) {
             <h4 className="font-serif text-lg font-semibold text-sumi">
               {def.title}
             </h4>
-            {def.badge && (
-              <span className="rounded-full bg-kin/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-kin">
-                {def.badge}
-              </span>
-            )}
           </div>
           <p className="mt-1 text-sm leading-relaxed text-sumi/70">
             {def.description}

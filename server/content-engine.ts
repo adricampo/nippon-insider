@@ -47,7 +47,9 @@ FORMATO DE SALIDA:
 - Inserta shortcodes de afiliados SOLO donde encajen de forma natural en la lectura (máximo 3 por artículo):
   [BANNER_JRPASS] (trenes/JR Pass), [PRODUCT_POCKET_WIFI] (conectividad), [PRODUCT_JAPAN_SIM] (eSIM),
   [LINK_AGODA_TOKYO] (hoteles Tokio), [LINK_RAKUTEN_TRAVEL] (ryokan/onsen), [LINK_BOOKING_HOTELS] (hoteles fuera de las
-  grandes ciudades), [PRODUCT_KLOOK_TOURS] / [PRODUCT_GETYOURGUIDE] (tours y entradas), [LINK_SKYSCANNER_VUELOS] (vuelos),
+  grandes ciudades), [PRODUCT_KLOOK_TOURS] (billete de metro de Tokio), [PRODUCT_KLOOK_SUMO] (exhibición de sumo +
+  chankonabe en Asakusa, SOLO si el artículo trata sobre Asakusa, sumo o experiencias culturales tradicionales en Tokio),
+  [PRODUCT_GETYOURGUIDE] (tours y entradas), [LINK_SKYSCANNER_VUELOS] (vuelos),
   [PRODUCT_SEGURO_VIAJE] (seguro), [PRODUCT_TARJETA_VIAJE] (tarjeta sin comisiones), [PRODUCT_AMAZON_GEAR] (equipo).
 - SOLO si el artículo es una guía de viaje completa (overview de un destino o "qué ver y hacer"), añade además, aparte
   del límite de 3 anteriores, el bloque [RECURSOS_VIAJE] una vez cerca del inicio (tras el primer o segundo párrafo)

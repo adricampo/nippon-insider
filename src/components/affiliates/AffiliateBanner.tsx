@@ -18,11 +18,6 @@ export default function AffiliateBanner({ code }: { code: string }) {
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-aka/10">
             <Icon className="h-6 w-6 text-aka" />
           </div>
-          {def.badge && (
-            <span className="inline-block rounded-full bg-aka/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-aka">
-              {def.badge}
-            </span>
-          )}
         </div>
         <div>
           <h4 className="font-serif text-xl font-semibold text-sumi">
