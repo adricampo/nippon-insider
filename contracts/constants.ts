@@ -1,0 +1,10 @@
+export const Session = {
+  cookieName: "admin_sid",
+  maxAgeMs: 365 * 24 * 60 * 60 * 1000,
+} as const;
+
+export const ErrorMessages = {
+  unauthenticated: "Authentication required",
+  insufficientRole: "Insufficient permissions",
+  invalidPassword: "Contraseña incorrecta",
+} as const;
