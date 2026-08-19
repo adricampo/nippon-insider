@@ -338,7 +338,10 @@ async function seed() {
       ...post,
       coverImage: `https://picsum.photos/seed/${post.slug}/800/600`,
     };
-    await db.insert(posts).values(withImage).onDuplicateKeyUpdate({ set: withImage });
+    await db
+      .insert(posts)
+      .values(withImage)
+      .onConflictDoUpdate({ target: posts.slug, set: withImage });
   }
 
   console.log(`Done. Inserted/updated ${seedPosts.length} posts.`);

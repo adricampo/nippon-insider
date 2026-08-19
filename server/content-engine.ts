@@ -623,7 +623,7 @@ export async function generatePost(
             readingMinutes: article.readingMinutes,
             publishedAt: new Date(),
           };
-          const [{ id }] = await db.insert(posts).values(row).$returningId();
+          const [{ id }] = await db.insert(posts).values(row).returning({ id: posts.id });
           return { id, slug: row.slug, title: row.title, category: row.category };
         }
       }
@@ -676,7 +676,7 @@ export async function generatePost(
     publishedAt: new Date(),
   };
 
-  const [{ id }] = await db.insert(posts).values(row).$returningId();
+  const [{ id }] = await db.insert(posts).values(row).returning({ id: posts.id });
 
   return {
     id,

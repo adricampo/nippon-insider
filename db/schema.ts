@@ -1,23 +1,25 @@
 import {
-  mysqlTable,
-  mysqlEnum,
+  pgTable,
+  pgEnum,
   serial,
   varchar,
   text,
   timestamp,
   bigint,
   boolean,
-  int,
+  integer,
   index,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
-export const users = mysqlTable("users", {
+export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
+
+export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   unionId: varchar("unionId", { length: 255 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
   email: varchar("email", { length: 320 }),
   avatar: text("avatar"),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  role: userRoleEnum("role").default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt")
     .defaultNow()
@@ -32,7 +34,15 @@ export type InsertUser = typeof users.$inferInsert;
 // ─────────────────────────────────────────────────────────────
 // POSTS — contenido del blog (generado automáticamente o manual)
 // ─────────────────────────────────────────────────────────────
-export const posts = mysqlTable(
+export const postCategoryEnum = pgEnum("post_category", [
+  "turismo",
+  "economia",
+  "cultura",
+  "inmobiliaria",
+]);
+export const postStatusEnum = pgEnum("post_status", ["borrador", "publicado"]);
+
+export const posts = pgTable(
   "posts",
   {
     id: serial("id").primaryKey(),
@@ -42,22 +52,15 @@ export const posts = mysqlTable(
     // Contenido en formato texto enriquecido con shortcodes de afiliados:
     // [BANNER_JRPASS], [PRODUCT_POCKET_WIFI], [CTA_PREMIUM], etc.
     content: text("content").notNull(),
-    category: mysqlEnum("category", [
-      "turismo",
-      "economia",
-      "cultura",
-      "inmobiliaria",
-    ]).notNull(),
+    category: postCategoryEnum("category").notNull(),
     coverImage: varchar("coverImage", { length: 500 }),
     // Paywall: true = requiere suscripción activa para leer completo
     isPremium: boolean("isPremium").default(false).notNull(),
-    status: mysqlEnum("status", ["borrador", "publicado"])
-      .default("publicado")
-      .notNull(),
+    status: postStatusEnum("status").default("publicado").notNull(),
     // Trazabilidad de la fuente original (RSS / NewsAPI)
     sourceName: varchar("sourceName", { length: 255 }),
     sourceUrl: varchar("sourceUrl", { length: 500 }),
-    readingMinutes: int("readingMinutes").default(4).notNull(),
+    readingMinutes: integer("readingMinutes").default(4).notNull(),
     publishedAt: timestamp("publishedAt").defaultNow().notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
@@ -76,22 +79,23 @@ export type InsertPost = typeof posts.$inferInsert;
 // Preparado para Stripe: stripeCustomerId / stripeSubscriptionId
 // se rellenan desde el webhook /api/webhooks/stripe
 // ─────────────────────────────────────────────────────────────
-export const subscriptions = mysqlTable(
+export const subscriptionPlanEnum = pgEnum("subscription_plan", ["mensual", "anual"]);
+export const subscriptionStatusEnum = pgEnum("subscription_status", [
+  "activa",
+  "cancelada",
+  "vencida",
+  "pendiente",
+]);
+
+export const subscriptions = pgTable(
   "subscriptions",
   {
     id: serial("id").primaryKey(),
-    userId: bigint("userId", { mode: "number", unsigned: true })
+    userId: bigint("userId", { mode: "number" })
       .notNull()
       .references(() => users.id),
-    plan: mysqlEnum("plan", ["mensual", "anual"]).notNull(),
-    status: mysqlEnum("status", [
-      "activa",
-      "cancelada",
-      "vencida",
-      "pendiente",
-    ])
-      .default("pendiente")
-      .notNull(),
+    plan: subscriptionPlanEnum("plan").notNull(),
+    status: subscriptionStatusEnum("status").default("pendiente").notNull(),
     stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
     stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
     currentPeriodEnd: timestamp("currentPeriodEnd"),
