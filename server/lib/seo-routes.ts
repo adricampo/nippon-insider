@@ -4,9 +4,9 @@ import type { Context } from "hono";
 import fs from "fs";
 import path from "path";
 import { eq, and, desc } from "drizzle-orm";
-import { getDb } from "../queries/connection";
-import { posts } from "../../db/schema";
-import { injectMeta } from "./seo";
+import { getDb } from "../queries/connection.js";
+import { posts } from "../../db/schema.js";
+import { injectMeta } from "./seo.js";
 
 type App = Hono<{ Bindings: HttpBindings }>;
 

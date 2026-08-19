@@ -1,5 +1,5 @@
-import { app } from "./app";
-import { env } from "./lib/env";
+import { app } from "./app.js";
+import { env } from "./lib/env.js";
 
 // Punto de entrada para hosting Node tradicional (Railway, Render, un VPS
 // con `npm start`...): un proceso persistente que sirve la API y los
@@ -9,8 +9,8 @@ export default app;
 
 if (env.isProduction) {
   const { serve } = await import("@hono/node-server");
-  const { serveStaticFiles } = await import("./lib/vite");
-  const { registerSeoRoutes } = await import("./lib/seo-routes");
+  const { serveStaticFiles } = await import("./lib/vite.js");
+  const { registerSeoRoutes } = await import("./lib/seo-routes.js");
   const path = await import("path");
 
   registerSeoRoutes(app, path.resolve(import.meta.dirname, "../dist/public"));

@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { createRouter, publicQuery, adminQuery } from "./middleware";
-import { getDb } from "./queries/connection";
-import { posts } from "../db/schema";
+import { createRouter, publicQuery, adminQuery } from "./middleware.js";
+import { getDb } from "./queries/connection.js";
+import { posts } from "../db/schema.js";
 import { and, desc, eq } from "drizzle-orm";
 
 const categoryEnum = z.enum(["turismo", "economia", "cultura", "inmobiliaria"]);

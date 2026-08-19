@@ -5,8 +5,8 @@
 // Ver vercel.json: restringe la detección de funciones a este archivo.
 import { handle } from "hono/vercel";
 import path from "path";
-import { app } from "../server/app";
-import { registerSeoRoutes, registerSpaFallback } from "../server/lib/seo-routes";
+import { app } from "../server/app.js";
+import { registerSeoRoutes, registerSpaFallback } from "../server/lib/seo-routes.js";
 
 export const config = { runtime: "nodejs" };
 

@@ -1,10 +1,10 @@
 import { timingSafeEqual } from "node:crypto";
 import * as cookie from "cookie";
-import { Session } from "../../contracts/constants";
-import { Errors } from "../../contracts/errors";
-import { env } from "../lib/env";
-import { signSessionToken, verifySessionToken } from "./session";
-import { findUserByUnionId, upsertUser } from "../queries/users";
+import { Session } from "../../contracts/constants.js";
+import { Errors } from "../../contracts/errors.js";
+import { env } from "../lib/env.js";
+import { signSessionToken, verifySessionToken } from "./session.js";
+import { findUserByUnionId, upsertUser } from "../queries/users.js";
 
 // Único administrador del sitio: no hay OAuth ni cuentas de terceros, así
 // que el "usuario" es siempre esta fila fija, creada/actualizada al

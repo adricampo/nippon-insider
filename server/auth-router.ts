@@ -1,10 +1,10 @@
 import { z } from "zod";
 import * as cookie from "cookie";
 import { TRPCError } from "@trpc/server";
-import { Session, ErrorMessages } from "../contracts/constants";
-import { getSessionCookieOptions } from "./lib/cookies";
-import { createRouter, authedQuery, publicQuery } from "./middleware";
-import { verifyAdminPassword, createAdminSession } from "./auth/login";
+import { Session, ErrorMessages } from "../contracts/constants.js";
+import { getSessionCookieOptions } from "./lib/cookies.js";
+import { createRouter, authedQuery, publicQuery } from "./middleware.js";
+import { verifyAdminPassword, createAdminSession } from "./auth/login.js";
 
 export const authRouter = createRouter({
   me: authedQuery.query((opts) => opts.ctx.user),

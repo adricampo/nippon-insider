@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { createRouter, adminQuery } from "./middleware";
-import { generatePost, listPoolStatus } from "./content-engine";
+import { createRouter, adminQuery } from "./middleware.js";
+import { generatePost, listPoolStatus } from "./content-engine.js";
 
 // Motor de generación: solo administradores desde la UI.
 // El cron externo (Vercel Cron / GitHub Actions / cron del servidor)

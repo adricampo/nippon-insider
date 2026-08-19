@@ -12,8 +12,8 @@
 // ─────────────────────────────────────────────────────────────
 
 import { z } from "zod";
-import { getDb } from "./queries/connection";
-import { posts, type InsertPost } from "../db/schema";
+import { getDb } from "./queries/connection.js";
+import { posts, type InsertPost } from "../db/schema.js";
 import {
   NEWS_FEEDS,
   CATEGORY_KEYWORDS,
@@ -21,9 +21,9 @@ import {
   JAPAN_KEYWORDS,
   type Category,
   type NewsFeed,
-} from "./sources";
-import { fetchRssItems, type RssItem } from "./rss";
-import { findCoverImage } from "./lib/pexels";
+} from "./sources.js";
+import { fetchRssItems, type RssItem } from "./rss.js";
+import { findCoverImage } from "./lib/pexels.js";
 
 // Prompt de sistema para OpenAI (gpt-4o). Tal como se diseñó para
 // evitar el tono "robótico": personalidad concreta, primera persona,

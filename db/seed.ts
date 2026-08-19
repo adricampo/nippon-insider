@@ -1,5 +1,5 @@
-import { getDb } from "../server/queries/connection";
-import { posts } from "./schema";
+import { getDb } from "../server/queries/connection.js";
+import { posts } from "./schema.js";
 
 function daysAgo(n: number): Date {
   const d = new Date();
