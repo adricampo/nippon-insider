@@ -4,7 +4,7 @@ import ShortcodeRenderer from "@/components/ShortcodeRenderer";
 import PostCard from "@/components/PostCard";
 import AffiliateBanner from "@/components/affiliates/AffiliateBanner";
 import ProductCard from "@/components/affiliates/ProductCard";
-import { categoryLabel, categoryKanji } from "@/lib/categories";
+import { categoryLabel } from "@/lib/categories";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Clock, ArrowLeft, ExternalLink } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -131,15 +131,6 @@ export default function PostPage() {
             <SidebarBox>
               <ProductCard code="PRODUCT_POCKET_WIFI" compact />
             </SidebarBox>
-            <div className="rounded-lg border border-sumi/10 bg-accent/50 p-5 text-center">
-              <span className="font-serif text-4xl text-aka/30">
-                {categoryKanji(post.category)}
-              </span>
-              <p className="mt-2 text-xs leading-relaxed text-sumi/55">
-                Los enlaces marcados son de afiliado: apoyas el blog sin coste
-                adicional.
-              </p>
-            </div>
           </div>
         </aside>
       </div>

@@ -96,9 +96,6 @@ export default function ResourceBox() {
           );
         })}
       </ul>
-      <p className="border-t border-sumi/10 bg-sumi/[0.03] px-5 py-2 text-[11px] text-sumi/50">
-        Enlaces de afiliado — apoyas este blog sin coste adicional.
-      </p>
     </aside>
   );
 }

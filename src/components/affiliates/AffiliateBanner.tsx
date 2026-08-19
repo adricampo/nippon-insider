@@ -89,9 +89,6 @@ export default function AffiliateBanner({
           <p className="mt-1.5 text-sm leading-relaxed text-sumi/70">
             {def.description}
           </p>
-          <p className="mt-3 text-[11px] text-sumi/45">
-            Enlace de afiliado — apoyas este blog sin coste adicional.
-          </p>
         </div>
       </div>
       <div className="relative flex w-32 shrink-0 flex-col items-center justify-center gap-2 border-l-2 border-dashed border-washi/40 bg-aka px-3 py-4 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44">

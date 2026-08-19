@@ -46,23 +46,9 @@ function renderShortcode(code: string, key: number): ReactNode {
 
 export default function ShortcodeRenderer({ content }: { content: string }) {
   const blocks = isolateInlineShortcodes(content).split(/\n\s*\n/);
-  const hasAffiliateLinks = blocks.some((b) =>
-    SHORTCODE_RE.test(b.trim()),
-  );
 
   return (
     <div className="article-body">
-      {hasAffiliateLinks && (
-        <p className="mb-8 rounded-md border border-sumi/10 bg-accent/40 px-4 py-2.5 text-xs leading-relaxed text-sumi/60">
-          Este artículo contiene enlaces de afiliado, señalados según
-          aparecen: si compras a través de ellos podemos recibir una
-          comisión, sin coste adicional para ti.{" "}
-          <a href="/privacidad" className="text-aka underline">
-            Más información
-          </a>
-          .
-        </p>
-      )}
       {blocks.map((block, i) => {
         const trimmed = block.trim();
         if (!trimmed) return null;
