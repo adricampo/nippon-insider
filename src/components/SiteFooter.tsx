@@ -15,8 +15,9 @@ export default function SiteFooter() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-washi/60">
-            Turismo, economía, cultura y mercado inmobiliario de Japón,
-            contado en español por quien vive allí desde hace una década.
+            Turismo, economía, cultura y mercado inmobiliario. Sin tópicos,
+            con datos contrastados y guías pensadas para que decidas con
+            información real.
           </p>
         </div>
         <div>
