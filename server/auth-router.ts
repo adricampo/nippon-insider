@@ -1,7 +1,7 @@
 import { z } from "zod";
 import * as cookie from "cookie";
 import { TRPCError } from "@trpc/server";
-import { Session, ErrorMessages } from "@contracts/constants";
+import { Session, ErrorMessages } from "../contracts/constants";
 import { getSessionCookieOptions } from "./lib/cookies";
 import { createRouter, authedQuery, publicQuery } from "./middleware";
 import { verifyAdminPassword, createAdminSession } from "./auth/login";

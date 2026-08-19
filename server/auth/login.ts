@@ -1,7 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 import * as cookie from "cookie";
-import { Session } from "@contracts/constants";
-import { Errors } from "@contracts/errors";
+import { Session } from "../../contracts/constants";
+import { Errors } from "../../contracts/errors";
 import { env } from "../lib/env";
 import { signSessionToken, verifySessionToken } from "./session";
 import { findUserByUnionId, upsertUser } from "../queries/users";

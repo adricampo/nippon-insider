@@ -13,7 +13,7 @@
 
 import { z } from "zod";
 import { getDb } from "./queries/connection";
-import { posts, type InsertPost } from "@db/schema";
+import { posts, type InsertPost } from "../db/schema";
 import {
   NEWS_FEEDS,
   CATEGORY_KEYWORDS,

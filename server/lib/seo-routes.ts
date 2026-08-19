@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import { eq, and, desc } from "drizzle-orm";
 import { getDb } from "../queries/connection";
-import { posts } from "@db/schema";
+import { posts } from "../../db/schema";
 import { injectMeta } from "./seo";
 
 type App = Hono<{ Bindings: HttpBindings }>;
