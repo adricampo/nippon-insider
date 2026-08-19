@@ -107,6 +107,7 @@ export default function PostPage() {
           <img
             src={post.coverImage}
             alt={post.title}
+            fetchPriority="high"
             className="mt-8 aspect-[2/1] w-full rounded-lg object-cover shadow-sm"
           />
         </div>

@@ -26,8 +26,11 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-sumi/10">
         <div className="absolute inset-0">
           <img
-            src="/images/hero.jpg"
+            src="/images/hero-1600.jpg"
+            srcSet="/images/hero-640.jpg 640w, /images/hero-1200.jpg 1200w, /images/hero-1600.jpg 1600w, /images/hero-2400.jpg 2400w"
+            sizes="100vw"
             alt="Japón"
+            fetchPriority="high"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-sumi/85 via-sumi/60 to-sumi/30" />
