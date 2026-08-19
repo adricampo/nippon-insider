@@ -1,5 +1,3 @@
-const TODO = "text-aka underline decoration-dotted underline-offset-2";
-
 export default function Privacidad() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
@@ -21,10 +19,10 @@ export default function Privacidad() {
             1. Responsable del tratamiento
           </h2>
           <p>
-            <span className={TODO}>[nombre completo o razón social]</span>,
-            con contacto en{" "}
-            <a href="mailto:adribdn7@gmail.com" className="text-aka">
-              adribdn7@gmail.com
+            <strong>Adrián Campo</strong>, con DNI 47331903L y domicilio en
+            C/ Saragossa 5, 08912 Badalona (Barcelona), con contacto en{" "}
+            <a href="mailto:info@nipponinsider.site" className="text-aka">
+              info@nipponinsider.site
             </a>
             , es responsable de los datos tratados a través de este sitio.
           </p>
@@ -89,8 +87,8 @@ export default function Privacidad() {
           <p>
             Puedes ejercer tus derechos de acceso, rectificación, supresión,
             oposición, limitación y portabilidad escribiendo a{" "}
-            <a href="mailto:adribdn7@gmail.com" className="text-aka">
-              adribdn7@gmail.com
+            <a href="mailto:info@nipponinsider.site" className="text-aka">
+              info@nipponinsider.site
             </a>
             . Responderemos en el plazo legal establecido por el RGPD.
           </p>

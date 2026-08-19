@@ -72,37 +72,31 @@ export default function PostPage() {
             {post.excerpt}
           </p>
           <div className="mt-6 flex items-center gap-3 border-t border-sumi/10 pt-5 text-sm text-sumi/55">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-aka font-serif text-washi">
-              外
-            </span>
-            <div>
-              <p className="font-semibold text-sumi">El Expatriado de Tokio</p>
-              <p className="text-xs">
-                {new Date(post.publishedAt).toLocaleDateString("es-ES", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-                {post.sourceName && (
-                  <>
-                    {" · Fuente: "}
-                    {post.sourceUrl ? (
-                      <a
-                        href={post.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-0.5 text-aka hover:underline"
-                      >
-                        {post.sourceName}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : (
-                      post.sourceName
-                    )}
-                  </>
-                )}
-              </p>
-            </div>
+            <p>
+              {new Date(post.publishedAt).toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+              {post.sourceName && (
+                <>
+                  {" · Fuente: "}
+                  {post.sourceUrl ? (
+                    <a
+                      href={post.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-0.5 text-aka hover:underline"
+                    >
+                      {post.sourceName}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ) : (
+                    post.sourceName
+                  )}
+                </>
+              )}
+            </p>
           </div>
         </div>
       </header>

@@ -1,5 +1,3 @@
-const TODO = "text-aka underline decoration-dotted underline-offset-2";
-
 export default function AvisoLegal() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
@@ -23,19 +21,13 @@ export default function AvisoLegal() {
             En cumplimiento del deber de información recogido en el artículo
             10 de la LSSICE, se indican los siguientes datos: el presente
             sitio web, <strong>Nippon Insider</strong>, es operado por{" "}
-            <span className={TODO}>[nombre completo o razón social]</span>,
-            con{" "}
-            <span className={TODO}>[NIF / DNI]</span>, domicilio en{" "}
-            <span className={TODO}>[dirección de contacto]</span> y correo
-            electrónico de contacto{" "}
-            <a href="mailto:adribdn7@gmail.com" className="text-aka">
-              adribdn7@gmail.com
+            <strong>Adrián Campo</strong>, con DNI 47331903L, domicilio en
+            C/ Saragossa 5, 08912 Badalona (Barcelona), y correo electrónico
+            de contacto{" "}
+            <a href="mailto:info@nipponinsider.site" className="text-aka">
+              info@nipponinsider.site
             </a>
             .
-          </p>
-          <p className="mt-2 text-sm text-sumi/50">
-            (Rellena los campos marcados en rojo con tus datos reales antes de
-            publicar el sitio.)
           </p>
         </section>
 
