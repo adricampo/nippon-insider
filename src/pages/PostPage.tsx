@@ -126,10 +126,10 @@ export default function PostPage() {
               Recomendado
             </p>
             <SidebarBox>
-              <AffiliateBanner code="BANNER_JRPASS" />
+              <AffiliateBanner code="BANNER_JRPASS" compact />
             </SidebarBox>
             <SidebarBox>
-              <ProductCard code="PRODUCT_POCKET_WIFI" />
+              <ProductCard code="PRODUCT_POCKET_WIFI" compact />
             </SidebarBox>
             <div className="rounded-lg border border-sumi/10 bg-accent/50 p-5 text-center">
               <span className="font-serif text-4xl text-aka/30">
