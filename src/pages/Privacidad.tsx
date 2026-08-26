@@ -33,9 +33,8 @@ export default function Privacidad() {
             2. Qué datos recogemos
           </h2>
           <p>
-            El sitio usa cookies propias necesarias para su funcionamiento
-            (por ejemplo, mantener tu sesión iniciada si te registras). Con tu
-            consentimiento, previa elección en el aviso de cookies de tu
+            El sitio usa cookies propias necesarias para su funcionamiento.
+            Con tu consentimiento, previa elección en el aviso de cookies de tu
             primera visita, también usamos <strong>Google Analytics 4</strong>{" "}
             para medir páginas vistas y origen del tráfico, con la IP
             anonimizada. Puedes rechazarlo eligiendo "Solo necesarias" en ese

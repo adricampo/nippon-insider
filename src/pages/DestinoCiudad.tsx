@@ -103,7 +103,7 @@ export default function DestinoCiudad() {
               <p className="mt-6 text-sm leading-relaxed text-sumi/70">
                 {guide.intro}
               </p>
-              <ShortcodeRenderer content={guide.content} simpleMobileCards />
+              <ShortcodeRenderer content={guide.content} />
 
               {(relatedCityLinks.length > 0 ||
                 (guide.relatedPosts?.length ?? 0) > 0) && (

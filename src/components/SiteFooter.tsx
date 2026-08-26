@@ -83,7 +83,7 @@ export default function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-washi/10 py-4 text-center text-xs text-washi/40">
-        © {new Date().getFullYear()} Nippon Insider — Hecho con matcha en Tokio
+        © 2026 Nippon Insider — Todos los derechos reservados
       </div>
     </footer>
   );

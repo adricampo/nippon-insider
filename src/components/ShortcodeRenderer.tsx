@@ -26,11 +26,7 @@ function isolateInlineShortcodes(content: string): string {
     .replace(/(\[[A-Z_]+\])([^\n])/g, "$1\n\n$2");
 }
 
-function renderShortcode(
-  code: string,
-  key: number,
-  simpleMobileCards: boolean,
-): ReactNode {
+function renderShortcode(code: string, key: number): ReactNode {
   // Caso especial: no es un afiliado individual, agrupa varios por categoría.
   if (code === "RECURSOS_VIAJE") return <ResourceBox key={key} />;
 
@@ -40,9 +36,7 @@ function renderShortcode(
     case "banner":
       return <AffiliateBanner key={key} code={code} />;
     case "product":
-      return (
-        <ProductCard key={key} code={code} simpleOnMobile={simpleMobileCards} />
-      );
+      return <ProductCard key={key} code={code} />;
     case "inline":
       return <InlineAffiliate key={key} code={code} />;
     default:
@@ -50,18 +44,7 @@ function renderShortcode(
   }
 }
 
-// `simpleMobileCards`: por debajo de `sm`, las tarjetas de producto pasan
-// al formato plano de Esenciales en vez del billete de dos columnas —
-// pensado para las guías de Destinos, donde el móvil es el caso de uso
-// principal. Desactivado por defecto para no tocar el aspecto ya
-// existente en los posts del blog.
-export default function ShortcodeRenderer({
-  content,
-  simpleMobileCards = false,
-}: {
-  content: string;
-  simpleMobileCards?: boolean;
-}) {
+export default function ShortcodeRenderer({ content }: { content: string }) {
   const blocks = isolateInlineShortcodes(content).split(/\n\s*\n/);
 
   return (
@@ -74,7 +57,7 @@ export default function ShortcodeRenderer({
         if (shortcodeMatch) {
           return (
             <Fragment key={i}>
-              {renderShortcode(shortcodeMatch[1], i, simpleMobileCards)}
+              {renderShortcode(shortcodeMatch[1], i)}
             </Fragment>
           );
         }

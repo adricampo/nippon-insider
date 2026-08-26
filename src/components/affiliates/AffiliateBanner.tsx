@@ -10,6 +10,10 @@ import { affiliateIcon } from "@/lib/affiliateIcons";
 //
 // `compact`: variante apilada para columnas estrechas (sidebar de
 // PostPage) — ver ProductCard para el porqué.
+//
+// La variante no-compact también se apila por debajo de `sm` (formato
+// plano tipo Esenciales, sin icono ni "agujeros" de billete) — el grid
+// de dos columnas de escritorio no cabe en un móvil. Ver ProductCard.
 export default function AffiliateBanner({
   code,
   compact = false,
@@ -76,10 +80,10 @@ export default function AffiliateBanner({
       href={def.url}
       {...linkProps}
       onClick={() => trackAffiliateClick(code, "banner")}
-      className="not-prose group relative my-8 grid grid-cols-[1fr_auto] overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+      className="not-prose group relative my-8 flex flex-col overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg sm:grid sm:grid-cols-[1fr_auto]"
     >
       <div className="flex items-start gap-4 p-6 sm:p-7">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-aka/10">
+        <div className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full bg-aka/10 sm:flex">
           <Icon className="h-7 w-7 text-aka" />
         </div>
         <div className="min-w-0">
@@ -91,14 +95,14 @@ export default function AffiliateBanner({
           </p>
         </div>
       </div>
-      <div className="relative flex w-32 shrink-0 flex-col items-center justify-center gap-2 border-l-2 border-dashed border-washi/40 bg-aka px-3 py-4 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44">
+      <div className="relative flex w-full shrink-0 items-center justify-between gap-2 border-t-2 border-dashed border-washi/40 bg-aka px-6 py-3.5 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44 sm:flex-col sm:justify-center sm:border-l-2 sm:border-t-0 sm:px-3 sm:py-4">
         <span
           aria-hidden
-          className="absolute -left-[9px] -top-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+          className="absolute -left-[9px] -top-[9px] hidden h-[18px] w-[18px] rounded-full bg-washi sm:block"
         />
         <span
           aria-hidden
-          className="absolute -bottom-[9px] -left-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+          className="absolute -bottom-[9px] -left-[9px] hidden h-[18px] w-[18px] rounded-full bg-washi sm:block"
         />
         {def.priceHint && (
           <span className="font-serif text-lg font-bold leading-tight sm:text-xl">

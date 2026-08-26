@@ -22,21 +22,19 @@ const CATEGORY_LABEL: Record<AffiliateCategory, string> = {
 // columnas estrechas como el sidebar de PostPage — la versión lado a
 // lado no cabe en 300px sin aplastar el título a una palabra por línea.
 //
-// `simpleOnMobile`: por debajo de `sm`, oculta el icono y los "agujeros"
-// de billete y convierte el talón lateral en una franja inferior a todo
-// el ancho — el mismo formato plano que ya usa la página de Esenciales —
-// para que el texto no quede aplastado contra la franja de precio en
-// pantallas estrechas. A partir de `sm` se recupera el formato de billete
-// de siempre, sin cambios. Pensado para las guías de Destinos, donde el
-// móvil es el caso de uso principal.
+// La variante no-compact, por debajo de `sm`, oculta el icono y los
+// "agujeros" de billete y convierte el talón lateral en una franja
+// inferior a todo el ancho — el mismo formato plano que ya usa la
+// página de Esenciales — para que el texto no quede aplastado contra
+// la franja de precio en pantallas estrechas (el grid de dos columnas
+// no cabe en un móvil). A partir de `sm` recupera el formato de
+// billete de siempre, sin cambios.
 export default function ProductCard({
   code,
   compact = false,
-  simpleOnMobile = false,
 }: {
   code: string;
   compact?: boolean;
-  simpleOnMobile?: boolean;
 }) {
   const def = AFFILIATES[code];
   if (!def) return null;
@@ -98,18 +96,10 @@ export default function ProductCard({
       target="_blank"
       rel="noopener noreferrer sponsored"
       onClick={() => trackAffiliateClick(code, "product")}
-      className={`not-prose group relative my-8 overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-        simpleOnMobile
-          ? "flex flex-col sm:grid sm:grid-cols-[1fr_auto]"
-          : "grid grid-cols-[1fr_auto]"
-      }`}
+      className="not-prose group relative my-8 flex flex-col overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg sm:grid sm:grid-cols-[1fr_auto]"
     >
       <div className="flex items-start gap-4 p-5 sm:p-6">
-        <div
-          className={`h-12 w-12 shrink-0 items-center justify-center rounded-full bg-aka/10 ${
-            simpleOnMobile ? "hidden sm:flex" : "flex"
-          }`}
-        >
+        <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-aka/10 sm:flex">
           <Icon className="h-6 w-6 text-aka" />
         </div>
         <div className="min-w-0">
@@ -126,24 +116,14 @@ export default function ProductCard({
           </p>
         </div>
       </div>
-      <div
-        className={`relative flex shrink-0 items-center gap-1.5 border-dashed border-washi/40 bg-aka text-center text-washi transition-colors group-hover:bg-aka-dark ${
-          simpleOnMobile
-            ? "w-full justify-between border-t-2 px-5 py-3 sm:w-36 sm:flex-col sm:justify-center sm:border-l-2 sm:border-t-0 sm:px-2.5 sm:py-4"
-            : "w-28 flex-col justify-center border-l-2 px-2.5 py-4 sm:w-36"
-        }`}
-      >
+      <div className="relative flex w-full shrink-0 items-center justify-between gap-1.5 border-t-2 border-dashed border-washi/40 bg-aka px-5 py-3 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-36 sm:flex-col sm:justify-center sm:border-l-2 sm:border-t-0 sm:px-2.5 sm:py-4">
         <span
           aria-hidden
-          className={`absolute -left-[9px] -top-[9px] h-[18px] w-[18px] rounded-full bg-washi ${
-            simpleOnMobile ? "hidden sm:block" : ""
-          }`}
+          className="absolute -left-[9px] -top-[9px] hidden h-[18px] w-[18px] rounded-full bg-washi sm:block"
         />
         <span
           aria-hidden
-          className={`absolute -bottom-[9px] -left-[9px] h-[18px] w-[18px] rounded-full bg-washi ${
-            simpleOnMobile ? "hidden sm:block" : ""
-          }`}
+          className="absolute -bottom-[9px] -left-[9px] hidden h-[18px] w-[18px] rounded-full bg-washi sm:block"
         />
         <span className="font-serif text-base font-bold leading-tight sm:text-lg">
           {price}
