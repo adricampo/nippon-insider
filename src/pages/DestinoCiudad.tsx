@@ -1,8 +1,9 @@
 import { useParams, Navigate, Link } from "react-router";
-import { ChevronLeft, ChevronRight, Map } from "lucide-react";
+import { ChevronLeft, ChevronRight, Map, MapPin } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { findCity, citySlug, REGIONS } from "@contracts/prefectures";
 import { CITY_GUIDES } from "@contracts/cityGuides";
+import { CITY_GUIDE_IMAGES } from "@contracts/cityGuideImages.generated";
 import ShortcodeRenderer from "@/components/ShortcodeRenderer";
 
 // Página de ciudad/pueblo dentro de una prefectura. Si existe una guía
@@ -32,6 +33,11 @@ export default function DestinoCiudad() {
   const { prefecture, city } = found;
   const region = REGIONS[prefecture.region];
   const otherCities = prefecture.cities.filter((c) => c !== city);
+
+  const coverImage = citySlugParam ? CITY_GUIDE_IMAGES[citySlugParam] : undefined;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${city}, ${prefecture.name}, Japón`,
+  )}`;
 
   const relatedCityLinks = (guide?.relatedCities ?? [])
     .map((slug) => {
@@ -75,13 +81,29 @@ export default function DestinoCiudad() {
           <h1 className="mt-2 font-serif text-4xl font-semibold text-sumi">
             {city}
           </h1>
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-sumi/50 hover:text-aka"
+          >
+            <MapPin className="h-3.5 w-3.5" />
+            Ver ubicación y cómo llegar en Google Maps
+          </a>
 
           {guide ? (
             <div className="max-w-2xl">
-              <p className="mt-4 text-sm leading-relaxed text-sumi/70">
+              {coverImage && (
+                <img
+                  src={coverImage}
+                  alt={city}
+                  className="mt-6 aspect-[2/1] w-full rounded-lg object-cover shadow-sm"
+                />
+              )}
+              <p className="mt-6 text-sm leading-relaxed text-sumi/70">
                 {guide.intro}
               </p>
-              <ShortcodeRenderer content={guide.content} />
+              <ShortcodeRenderer content={guide.content} simpleMobileCards />
 
               {(relatedCityLinks.length > 0 ||
                 (guide.relatedPosts?.length ?? 0) > 0) && (

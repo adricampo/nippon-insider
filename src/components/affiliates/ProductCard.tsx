@@ -21,12 +21,22 @@ const CATEGORY_LABEL: Record<AffiliateCategory, string> = {
 // `compact`: variante apilada (talón como franja horizontal abajo) para
 // columnas estrechas como el sidebar de PostPage — la versión lado a
 // lado no cabe en 300px sin aplastar el título a una palabra por línea.
+//
+// `simpleOnMobile`: por debajo de `sm`, oculta el icono y los "agujeros"
+// de billete y convierte el talón lateral en una franja inferior a todo
+// el ancho — el mismo formato plano que ya usa la página de Esenciales —
+// para que el texto no quede aplastado contra la franja de precio en
+// pantallas estrechas. A partir de `sm` se recupera el formato de billete
+// de siempre, sin cambios. Pensado para las guías de Destinos, donde el
+// móvil es el caso de uso principal.
 export default function ProductCard({
   code,
   compact = false,
+  simpleOnMobile = false,
 }: {
   code: string;
   compact?: boolean;
+  simpleOnMobile?: boolean;
 }) {
   const def = AFFILIATES[code];
   if (!def) return null;
@@ -88,10 +98,18 @@ export default function ProductCard({
       target="_blank"
       rel="noopener noreferrer sponsored"
       onClick={() => trackAffiliateClick(code, "product")}
-      className="not-prose group relative my-8 grid grid-cols-[1fr_auto] overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+      className={`not-prose group relative my-8 overflow-hidden rounded-xl bg-card no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
+        simpleOnMobile
+          ? "flex flex-col sm:grid sm:grid-cols-[1fr_auto]"
+          : "grid grid-cols-[1fr_auto]"
+      }`}
     >
       <div className="flex items-start gap-4 p-5 sm:p-6">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-aka/10">
+        <div
+          className={`h-12 w-12 shrink-0 items-center justify-center rounded-full bg-aka/10 ${
+            simpleOnMobile ? "hidden sm:flex" : "flex"
+          }`}
+        >
           <Icon className="h-6 w-6 text-aka" />
         </div>
         <div className="min-w-0">
@@ -108,14 +126,24 @@ export default function ProductCard({
           </p>
         </div>
       </div>
-      <div className="relative flex w-28 shrink-0 flex-col items-center justify-center gap-1.5 border-l-2 border-dashed border-washi/40 bg-aka px-2.5 py-4 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-36">
+      <div
+        className={`relative flex shrink-0 items-center gap-1.5 border-dashed border-washi/40 bg-aka text-center text-washi transition-colors group-hover:bg-aka-dark ${
+          simpleOnMobile
+            ? "w-full justify-between border-t-2 px-5 py-3 sm:w-36 sm:flex-col sm:justify-center sm:border-l-2 sm:border-t-0 sm:px-2.5 sm:py-4"
+            : "w-28 flex-col justify-center border-l-2 px-2.5 py-4 sm:w-36"
+        }`}
+      >
         <span
           aria-hidden
-          className="absolute -left-[9px] -top-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+          className={`absolute -left-[9px] -top-[9px] h-[18px] w-[18px] rounded-full bg-washi ${
+            simpleOnMobile ? "hidden sm:block" : ""
+          }`}
         />
         <span
           aria-hidden
-          className="absolute -bottom-[9px] -left-[9px] h-[18px] w-[18px] rounded-full bg-washi"
+          className={`absolute -bottom-[9px] -left-[9px] h-[18px] w-[18px] rounded-full bg-washi ${
+            simpleOnMobile ? "hidden sm:block" : ""
+          }`}
         />
         <span className="font-serif text-base font-bold leading-tight sm:text-lg">
           {price}

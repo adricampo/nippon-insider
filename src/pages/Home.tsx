@@ -35,7 +35,7 @@ export default function Home() {
             sizes="100vw"
             alt="Japón"
             fetchPriority="high"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-right sm:object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-sumi/85 via-sumi/60 to-sumi/30" />
         </div>
@@ -140,9 +140,15 @@ export default function Home() {
             </div>
           ) : (
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
+              {posts.map((post, i) =>
+                i >= 3 ? (
+                  <div key={post.id} className="hidden sm:block">
+                    <PostCard post={post} />
+                  </div>
+                ) : (
+                  <PostCard key={post.id} post={post} />
+                ),
+              )}
             </div>
           )}
         </div>
