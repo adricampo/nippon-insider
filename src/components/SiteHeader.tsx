@@ -2,6 +2,14 @@ import { Link, NavLink } from "react-router";
 import { CATEGORIES } from "@/lib/categories";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -29,12 +37,45 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {CATEGORIES.map((c) => (
-            <NavLink key={c.slug} to={`/categoria/${c.slug}`} className={navClass}>
-              {c.label}
-            </NavLink>
-          ))}
+        <nav className="hidden items-center gap-1 md:flex">
+          <NavLink
+            to="/esenciales"
+            className={(props) => `px-3 py-2 ${navClass(props)}`}
+          >
+            Esenciales
+          </NavLink>
+          <NavLink
+            to="/destinos"
+            className={(props) => `px-3 py-2 ${navClass(props)}`}
+          >
+            Destinos
+          </NavLink>
+          <NavigationMenu viewport={false}>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent px-3 text-sm font-normal tracking-wide text-sumi/70 hover:bg-transparent hover:text-aka focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-aka">
+                  Blog
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-48 gap-1 p-1">
+                    {CATEGORIES.map((c) => (
+                      <li key={c.slug}>
+                        <NavigationMenuLink
+                          asChild
+                          className="flex-row items-center gap-2"
+                        >
+                          <NavLink to={`/categoria/${c.slug}`}>
+                            <span className="font-serif text-aka">{c.kanji}</span>
+                            {c.label}
+                          </NavLink>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </nav>
 
         <button
@@ -49,16 +90,35 @@ export default function SiteHeader() {
       {open && (
         <nav className="border-t border-sumi/10 bg-washi px-4 py-4 md:hidden">
           <div className="flex flex-col gap-3">
-            {CATEGORIES.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/categoria/${c.slug}`}
-                onClick={() => setOpen(false)}
-                className="text-sm text-sumi/80"
-              >
-                {c.label}
-              </Link>
-            ))}
+            <Link
+              to="/esenciales"
+              onClick={() => setOpen(false)}
+              className="text-sm text-sumi/80"
+            >
+              Esenciales
+            </Link>
+            <Link
+              to="/destinos"
+              onClick={() => setOpen(false)}
+              className="text-sm text-sumi/80"
+            >
+              Destinos
+            </Link>
+            <div className="mt-2 flex flex-col gap-3 border-t border-sumi/10 pt-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-sumi/40">
+                Blog
+              </p>
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.slug}
+                  to={`/categoria/${c.slug}`}
+                  onClick={() => setOpen(false)}
+                  className="pl-2 text-sm text-sumi/80"
+                >
+                  <span className="font-serif text-aka">{c.kanji}</span> {c.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </nav>
       )}

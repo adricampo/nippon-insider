@@ -5,6 +5,9 @@ import CookieConsent from "@/components/CookieConsent";
 import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 import CategoryPage from "@/pages/CategoryPage";
+import Esenciales from "@/pages/Esenciales";
+import Destinos from "@/pages/Destinos";
+import DestinoCiudad from "@/pages/DestinoCiudad";
 import PostPage from "@/pages/PostPage";
 import Admin from "@/pages/Admin";
 import Login from "@/pages/Login";
@@ -21,6 +24,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/categoria/:slug" element={<CategoryPage />} />
+          <Route path="/esenciales" element={<Esenciales />} />
+          <Route path="/destinos" element={<Destinos />} />
+          <Route path="/destinos/:prefSlug/:citySlug" element={<DestinoCiudad />} />
           <Route path="/post/:slug" element={<PostPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />

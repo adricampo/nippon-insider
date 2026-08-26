@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import { trpc } from "@/providers/trpc";
 import ShortcodeRenderer from "@/components/ShortcodeRenderer";
 import PostCard from "@/components/PostCard";
@@ -11,6 +11,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function PostPage() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const { data: post, isLoading } = trpc.posts.bySlug.useQuery(
     { slug: slug ?? "" },
     { enabled: !!slug },
@@ -51,12 +52,14 @@ export default function PostPage() {
       {/* Cabecera del artículo */}
       <header className="border-b border-sumi/10 bg-accent/40">
         <div className="mx-auto max-w-6xl px-4 py-12">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-1 text-sm text-sumi/60 hover:text-aka"
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            aria-label="Volver"
+            className="inline-flex items-center text-sm text-sumi/60 hover:text-aka"
           >
-            <ArrowLeft className="h-4 w-4" /> Portada
-          </Link>
+            <ArrowLeft className="h-4 w-4" />
+          </button>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="rounded-sm bg-aka px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-washi">
               {categoryLabel(post.category)}

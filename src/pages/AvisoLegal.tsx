@@ -64,9 +64,8 @@ export default function AvisoLegal() {
             Algunos artículos incluyen enlaces de afiliado a servicios de
             terceros (reservas de alojamiento, transporte, conectividad,
             etc.). Si realizas una compra a través de ellos, Nippon Insider
-            puede recibir una comisión, sin coste adicional para ti. Estos
-            enlaces se identifican en el propio artículo. Consulta también
-            nuestra{" "}
+            puede recibir una comisión, sin coste adicional para ti. Consulta
+            también nuestra{" "}
             <a href="/privacidad" className="text-aka underline">
               política de privacidad
             </a>{" "}
@@ -94,6 +93,29 @@ export default function AvisoLegal() {
             Este aviso legal puede actualizarse para reflejar cambios en el
             sitio o en la normativa aplicable. La fecha de última revisión se
             indica al pie de esta página.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="mb-2 font-serif text-xl font-semibold text-sumi">
+            7. Créditos de terceros
+          </h2>
+          <p>
+            El mapa interactivo de la sección{" "}
+            <a href="/destinos" className="text-aka underline">
+              Destinos
+            </a>{" "}
+            está basado en el mapa de prefecturas de{" "}
+            <a
+              href="https://github.com/geolonia/japanese-prefectures"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-aka underline"
+            >
+              Geolonia
+            </a>
+            , a su vez basado en el mapa de Japón de Wikipedia, ambos bajo
+            licencia GFDL.
           </p>
         </section>
       </div>

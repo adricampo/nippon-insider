@@ -1,57 +1,16 @@
-import {
-  AFFILIATES,
-  type AffiliateCategory,
-  type AffiliateDef,
-} from "@contracts/affiliates";
-import {
-  Plane,
-  BedDouble,
-  TrainFront,
-  ShieldCheck,
-  Wifi,
-  CreditCard,
-  Ticket,
-  ArrowUpRight,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { trackAffiliateClick } from "@/lib/affiliateTracking";
+import {
+  CATEGORY_META,
+  CATEGORY_ORDER,
+  pickByCategory,
+} from "@/lib/affiliateCategories";
 
 // Cuadro de "recursos básicos del viaje": una fila compacta por categoría,
 // agrupando el registro central de afiliados en vez de duplicar datos.
 // Pensado para colocarse una vez cerca del inicio (y opcionalmente otra
 // al cierre) de artículos que sean guías de viaje completas, vía el
 // shortcode [RECURSOS_VIAJE].
-
-const CATEGORY_META: Record<
-  AffiliateCategory,
-  { label: string; icon: LucideIcon }
-> = {
-  vuelos: { label: "Vuelos", icon: Plane },
-  alojamiento: { label: "Alojamiento", icon: BedDouble },
-  transporte: { label: "Transporte", icon: TrainFront },
-  seguro: { label: "Seguro de viaje", icon: ShieldCheck },
-  conectividad: { label: "Conectividad", icon: Wifi },
-  dinero: { label: "Dinero y tarjetas", icon: CreditCard },
-  tours: { label: "Tours y experiencias", icon: Ticket },
-};
-
-const CATEGORY_ORDER: AffiliateCategory[] = [
-  "vuelos",
-  "alojamiento",
-  "transporte",
-  "seguro",
-  "conectividad",
-  "dinero",
-  "tours",
-];
-
-function pickByCategory(): Partial<Record<AffiliateCategory, AffiliateDef>> {
-  const picks: Partial<Record<AffiliateCategory, AffiliateDef>> = {};
-  for (const def of Object.values(AFFILIATES)) {
-    if (def.category && !picks[def.category]) picks[def.category] = def;
-  }
-  return picks;
-}
 
 export default function ResourceBox() {
   const picks = pickByCategory();

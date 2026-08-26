@@ -1,7 +1,7 @@
 import { useParams, Navigate } from "react-router";
 import { trpc } from "@/providers/trpc";
 import PostCard from "@/components/PostCard";
-import { CATEGORIES, categoryLabel, categoryKanji } from "@/lib/categories";
+import { CATEGORIES, categoryLabel } from "@/lib/categories";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
@@ -25,10 +25,7 @@ export default function CategoryPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-aka">
-        <span className="font-serif">{categoryKanji(slug!)}</span> Sección
-      </p>
-      <h1 className="mt-2 font-serif text-4xl font-semibold text-sumi">
+      <h1 className="font-serif text-4xl font-semibold text-sumi">
         {categoryLabel(slug!)}
       </h1>
       <p className="mt-3 max-w-xl text-sm leading-relaxed text-sumi/60">

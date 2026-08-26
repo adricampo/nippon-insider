@@ -15,9 +15,10 @@ export default function SiteFooter() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-washi/60">
-            Turismo, economía, cultura y mercado inmobiliario. Sin tópicos,
-            con datos contrastados y guías pensadas para que decidas con
-            información real.
+            Turismo, economía, cultura y mercado inmobiliario, con guías de
+            viaje y un mapa interactivo de las 47 prefecturas. Sin tópicos,
+            con datos contrastados y guías pensadas para moverte con
+            criterio.
           </p>
         </div>
         <div>
@@ -25,16 +26,33 @@ export default function SiteFooter() {
             Secciones
           </h4>
           <ul className="mt-4 space-y-2 text-sm">
-            {CATEGORIES.map((c) => (
-              <li key={c.slug}>
-                <Link
-                  to={`/categoria/${c.slug}`}
-                  className="transition-colors hover:text-washi"
-                >
-                  {c.label}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link to="/esenciales" className="transition-colors hover:text-washi">
+                Esenciales
+              </Link>
+            </li>
+            <li>
+              <Link to="/destinos" className="transition-colors hover:text-washi">
+                Destinos
+              </Link>
+            </li>
+            <li>
+              <Link to="/" className="transition-colors hover:text-washi">
+                Blog
+              </Link>
+              <ul className="mt-2 space-y-2 border-l border-washi/10 pl-3">
+                {CATEGORIES.map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      to={`/categoria/${c.slug}`}
+                      className="text-washi/60 transition-colors hover:text-washi"
+                    >
+                      {c.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
           </ul>
         </div>
         <div>
@@ -42,8 +60,7 @@ export default function SiteFooter() {
             Transparencia
           </h4>
           <p className="mt-4 text-sm leading-relaxed text-washi/60">
-            Algunos artículos incluyen enlaces de afiliado, señalados en el
-            propio texto. Más detalles abajo.
+            Algunos artículos incluyen enlaces de afiliado.
           </p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
