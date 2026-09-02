@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { PREFECTURES, REGIONS, REGION_ORDER } from "@contracts/prefectures";
 
 // Lista de respaldo, siempre visible (no oculta tras un toggle), agrupada
@@ -24,13 +25,18 @@ export default function PrefectureListFallback({
 
         return (
           <section key={regionSlug}>
-            <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-sumi/60">
-              <span
-                aria-hidden
-                className="h-2 w-2 shrink-0 rounded-full"
-                style={{ backgroundColor: region.color }}
-              />
-              {region.label}
+            <h3>
+              <Link
+                to={`/destinos/region/${regionSlug}`}
+                className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-sumi/60 hover:text-aka"
+              >
+                <span
+                  aria-hidden
+                  className="h-2 w-2 shrink-0 rounded-full"
+                  style={{ backgroundColor: region.color }}
+                />
+                {region.label}
+              </Link>
             </h3>
             <ul className="mt-3 space-y-1">
               {prefs.map((pref) => (

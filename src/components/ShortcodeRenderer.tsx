@@ -62,6 +62,17 @@ export default function ShortcodeRenderer({ content }: { content: string }) {
           );
         }
 
+        if (trimmed.startsWith("### ")) {
+          return (
+            <h3
+              key={i}
+              className="mb-2 mt-7 font-serif text-lg font-semibold text-sumi"
+            >
+              {trimmed.slice(4)}
+            </h3>
+          );
+        }
+
         if (trimmed.startsWith("## ")) {
           return (
             <h2

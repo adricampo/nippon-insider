@@ -52,7 +52,7 @@ export default function AffiliateBanner({
             </p>
           </div>
         </div>
-        <div className="relative flex items-center justify-between gap-2 border-t-2 border-dashed border-washi/40 bg-aka px-4 py-2.5 text-washi transition-colors group-hover:bg-aka-dark">
+        <div className="relative flex items-center justify-between gap-2 bg-aka px-4 py-2.5 text-washi transition-colors group-hover:bg-aka-dark">
           <span
             aria-hidden
             className="absolute -left-[9px] top-1/2 h-[18px] w-[18px] -translate-y-1/2 rounded-full bg-washi"
@@ -95,7 +95,7 @@ export default function AffiliateBanner({
           </p>
         </div>
       </div>
-      <div className="relative flex w-full shrink-0 items-center justify-between gap-2 border-t-2 border-dashed border-washi/40 bg-aka px-6 py-3.5 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44 sm:flex-col sm:justify-center sm:border-l-2 sm:border-t-0 sm:px-3 sm:py-4">
+      <div className="relative flex w-full shrink-0 items-center justify-between gap-2 bg-aka px-6 py-3.5 text-center text-washi transition-colors group-hover:bg-aka-dark sm:w-44 sm:flex-col sm:justify-center sm:px-3 sm:py-4">
         <span
           aria-hidden
           className="absolute -left-[9px] -top-[9px] hidden h-[18px] w-[18px] rounded-full bg-washi sm:block"

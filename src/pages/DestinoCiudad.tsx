@@ -67,8 +67,9 @@ export default function DestinoCiudad() {
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_300px]">
         <div>
-          <p
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em]"
+          <Link
+            to={`/destinos/region/${prefecture.region}`}
+            className="group inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] hover:underline"
             style={{ color: region.color }}
           >
             <span
@@ -77,7 +78,7 @@ export default function DestinoCiudad() {
               style={{ backgroundColor: region.color }}
             />
             {region.label} · {prefecture.name}
-          </p>
+          </Link>
           <h1 className="mt-2 font-serif text-4xl font-semibold text-sumi">
             {city}
           </h1>
@@ -111,31 +112,51 @@ export default function DestinoCiudad() {
                   <p className="text-xs font-semibold uppercase tracking-wide text-sumi/40">
                     También te puede interesar
                   </p>
-                  <ul className="mt-3 space-y-2">
-                    {relatedCityLinks.map((rc) => (
-                      <li key={rc.slug}>
+                  {relatedCityLinks.length > 0 && (
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                      {relatedCityLinks.map((rc) => (
                         <Link
+                          key={rc.slug}
                           to={`/destinos/${rc.prefecture.slug}/${rc.slug}`}
-                          className="inline-flex items-center gap-1 text-sm font-medium text-aka hover:underline"
+                          className="group flex items-center gap-3 overflow-hidden rounded-lg border border-sumi/10 bg-card p-2.5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                         >
-                          {rc.city}
-                          <span className="font-normal text-sumi/50">
-                            — {rc.prefecture.name}
+                          {CITY_GUIDE_IMAGES[rc.slug] ? (
+                            <img
+                              src={CITY_GUIDE_IMAGES[rc.slug]}
+                              alt={rc.city}
+                              className="h-14 w-14 shrink-0 rounded-md object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-accent/60 font-serif text-lg text-aka/30">
+                              地
+                            </div>
+                          )}
+                          <span className="min-w-0">
+                            <span className="block truncate text-sm font-semibold text-sumi transition-colors group-hover:text-aka">
+                              {rc.city}
+                            </span>
+                            <span className="block truncate text-xs text-sumi/50">
+                              {rc.prefecture.name}
+                            </span>
                           </span>
                         </Link>
-                      </li>
-                    ))}
-                    {guide.relatedPosts?.map((p) => (
-                      <li key={p.slug}>
-                        <Link
-                          to={`/post/${p.slug}`}
-                          className="text-sm font-medium text-aka hover:underline"
-                        >
-                          {p.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                      ))}
+                    </div>
+                  )}
+                  {guide.relatedPosts && guide.relatedPosts.length > 0 && (
+                    <ul className="mt-3 space-y-2">
+                      {guide.relatedPosts.map((p) => (
+                        <li key={p.slug}>
+                          <Link
+                            to={`/post/${p.slug}`}
+                            className="text-sm font-medium text-aka hover:underline"
+                          >
+                            {p.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
             </div>

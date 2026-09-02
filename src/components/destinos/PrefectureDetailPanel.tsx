@@ -47,8 +47,9 @@ export default function PrefectureDetailPanel({
           <X className="h-4 w-4" />
         </button>
       )}
-      <p
-        className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em]"
+      <Link
+        to={`/destinos/region/${pref.region}`}
+        className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] hover:underline"
         style={{ color: region.color }}
       >
         <span
@@ -57,7 +58,7 @@ export default function PrefectureDetailPanel({
           style={{ backgroundColor: region.color }}
         />
         {region.label}
-      </p>
+      </Link>
       <h3 className="mt-2 font-serif text-3xl font-semibold text-sumi">
         {pref.name}{" "}
         <span className="text-xl font-normal text-sumi/40">

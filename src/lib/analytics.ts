@@ -25,10 +25,18 @@ export function loadAnalytics() {
   window.gtag = function gtag(...args: unknown[]) {
     window.dataLayer!.push(args);
   };
+  // Consent Mode v2: esta función solo se llama después de que
+  // CookieConsent.tsx registre el "Aceptar todas" del usuario, así que
+  // el consentimiento ya está dado — hay que decírselo explícitamente a
+  // gtag.js con "consent default", si no, Google puede aplicar su propio
+  // valor por defecto (denegado) a tráfico de la UE y descartar las
+  // visitas en silencio aunque el script cargue sin errores.
+  window.gtag("consent", "default", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+  });
   window.gtag("js", new Date());
-  // IP anonimizada: menos datos personales procesados, coherente con
-  // el aviso de privacidad.
-  window.gtag("config", measurementId, { anonymize_ip: true });
+  window.gtag("config", measurementId);
 
   const script = document.createElement("script");
   script.async = true;
