@@ -27,7 +27,7 @@ export default function PostCard({ post }: { post: Post }) {
         </span>
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-serif text-xl font-semibold leading-snug text-sumi transition-colors group-hover:text-aka">
+        <h3 className="line-clamp-2 font-serif text-xl font-semibold leading-snug text-sumi transition-colors group-hover:text-aka">
           {post.title}
         </h3>
         <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-sumi/65">
