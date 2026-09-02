@@ -35,6 +35,13 @@ export function loadAnalytics() {
     analytics_storage: "granted",
     ad_storage: "denied",
   });
+  // Además del "default", mandamos un "update" explícito: Tag Assistant
+  // mostraba los hits en estado "aplazados" esperando una señal de
+  // consentimiento pese al default ya concedido — un "update" inmediato
+  // fuerza a gtag.js a soltar la cola en vez de quedarse esperando.
+  window.gtag("consent", "update", {
+    analytics_storage: "granted",
+  });
   window.gtag("js", new Date());
   window.gtag("config", measurementId);
 
