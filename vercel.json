@@ -6,6 +6,14 @@
       "includeFiles": "dist/public/**"
     }
   },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "nipponinsider.site" }],
+      "destination": "https://www.nipponinsider.site/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
