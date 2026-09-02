@@ -90,7 +90,7 @@ export default function Esenciales() {
                       {def.description}
                     </p>
                   </div>
-                  <div className="mt-auto flex items-center justify-between gap-2 border-t-2 border-dashed border-washi/40 bg-aka px-5 py-3 text-washi transition-colors group-hover:bg-aka-dark">
+                  <div className="mt-auto flex items-center justify-between gap-2 bg-aka px-5 py-3 text-washi transition-colors group-hover:bg-aka-dark">
                     {def.priceHint ? (
                       <span className="font-serif text-sm font-bold leading-tight">
                         {def.priceHint}
