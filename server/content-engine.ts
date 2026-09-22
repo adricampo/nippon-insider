@@ -24,6 +24,7 @@ import {
 } from "./sources.js";
 import { fetchRssItems, type RssItem } from "./rss.js";
 import { findCoverImage } from "./lib/pexels.js";
+import { AFFILIATES } from "../contracts/affiliates.js";
 
 // Prompt de sistema para OpenAI (gpt-4o). Voz editorial estilo Japonismo:
 // explicativa y directa al lector, sin personaje ficticio ni anécdotas de
@@ -44,6 +45,9 @@ REGLAS DE ESTILO:
 
 FORMATO DE SALIDA:
 - Párrafos separados por líneas en blanco. Encabezados de sección con "## ".
+- NUNCA uses negrita ni cursiva en formato Markdown (nada de "**texto**", "__texto__" ni "*texto*"): el renderizador
+  del blog no las interpreta y el asterisco se mostraría literal en la página. Si quieres dar énfasis a algo, hazlo
+  con la propia redacción, no con marcado.
 - Inserta shortcodes de afiliados SOLO donde encajen de forma natural en la lectura (máximo 3 por artículo):
   [BANNER_JRPASS] (trenes/JR Pass), [PRODUCT_POCKET_WIFI] (conectividad), [PRODUCT_JAPAN_SIM] (eSIM),
   [LINK_AGODA_TOKYO] (hoteles Tokio), [LINK_RAKUTEN_TRAVEL] (ryokan/onsen), [LINK_BOOKING_HOTELS] (hoteles fuera de las
@@ -407,13 +411,18 @@ const NEWS_POOL: SourceItem[] = [
 // ─────────────────────────────────────────────────────────────
 
 function slugify(text: string): string {
-  return text
+  const full = text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
-    .slice(0, 80);
+    .replace(/(^-|-$)/g, "");
+  if (full.length <= 80) return full;
+  // Cortar en el último guion antes del límite, no a media palabra
+  // (un slice(0, 80) a secas puede dejar algo como "...-en-j").
+  const cut = full.slice(0, 80);
+  const lastHyphen = cut.lastIndexOf("-");
+  return lastHyphen > 0 ? cut.slice(0, lastHyphen) : cut;
 }
 
 function renderContent(sections: ArticleBlock[]): string {
@@ -424,6 +433,69 @@ function renderContent(sections: ArticleBlock[]): string {
       return b.text;
     })
     .join("\n\n");
+}
+
+// ─────────────────────────────────────────────────────────────
+// Saneado + auditoría automática, previa a publicar
+//
+// ShortcodeRenderer solo entiende "## "/"### " y shortcodes [CODIGO] — no
+// interpreta Markdown de énfasis. Vista una tanda real donde OpenAI coló
+// "**texto**" que salió literal en la página, se añade una doble red: (1)
+// saneamos cualquier marca de negrita que se haya colado igualmente pese a
+// la instrucción del prompt, y (2) auditamos el resultado antes de decidir
+// si se publica solo o se queda en borrador para revisión manual.
+// ─────────────────────────────────────────────────────────────
+
+const VALID_SHORTCODES = new Set([...Object.keys(AFFILIATES), "RECURSOS_VIAJE"]);
+
+export function sanitizeContent(content: string): string {
+  return content
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1");
+}
+
+export interface AuditResult {
+  ok: boolean;
+  issues: string[];
+}
+
+export function auditArticle(article: {
+  title: string;
+  content: string;
+}): AuditResult {
+  const issues: string[] = [];
+
+  if (/\*\*|__/.test(article.content)) {
+    issues.push("quedan marcas de negrita Markdown (** o __) sin sanear");
+  }
+
+  const codes = [...article.content.matchAll(/\[([A-Z_0-9]+)\]/g)].map(
+    (m) => m[1],
+  );
+  for (const code of codes) {
+    if (!VALID_SHORTCODES.has(code)) {
+      issues.push(`shortcode desconocido: [${code}]`);
+    }
+  }
+
+  if (!/^##\s/m.test(article.content)) {
+    issues.push("no tiene ningún encabezado ## (estructura sospechosa)");
+  }
+
+  const paragraphs = article.content
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const lastParagraph = paragraphs[paragraphs.length - 1] ?? "";
+  if (lastParagraph.trim().endsWith("?")) {
+    issues.push("el último párrafo termina en pregunta (norma editorial: nunca)");
+  }
+
+  if (article.title.trim().length < 10) {
+    issues.push("título demasiado corto");
+  }
+
+  return { ok: issues.length === 0, issues };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -618,15 +690,23 @@ export async function generatePost(
             [live.item.title, CATEGORY_COVER_QUERY[live.category]],
             usedCovers,
           );
+          const content = sanitizeContent(article.content);
+          const audit = auditArticle({ title: article.title, content });
+          if (!audit.ok) {
+            console.warn(
+              `[content-engine] Auditoría no superada para "${article.title}" — se guarda como borrador:`,
+              audit.issues,
+            );
+          }
           const row: InsertPost = {
             slug,
             title: article.title,
             excerpt: article.excerpt,
-            content: article.content,
+            content,
             category: live.category,
             coverImage,
             isPremium: false,
-            status: "borrador",
+            status: audit.ok ? "publicado" : "borrador",
             sourceName: live.feedName,
             sourceUrl: live.item.link,
             readingMinutes: article.readingMinutes,
@@ -668,17 +748,26 @@ export async function generatePost(
     usedCovers,
   );
 
+  const poolContent = sanitizeContent(renderContent(pick.sections));
+  const poolAudit = auditArticle({ title: pick.headline, content: poolContent });
+  if (!poolAudit.ok) {
+    console.warn(
+      `[content-engine] Auditoría no superada para "${pick.headline}" (pool fijo) — se guarda como borrador:`,
+      poolAudit.issues,
+    );
+  }
+
   const row: InsertPost = {
     slug: slugify(pick.headline),
     title: pick.headline,
     excerpt: pick.excerpt,
-    content: renderContent(pick.sections),
+    content: poolContent,
     category: pick.category,
     coverImage,
     isPremium: false,
-    // Nace como borrador: requiere revisión editorial antes de publicarse
-    // (ver postsRouter.publish, expuesto en el panel de administración).
-    status: "borrador",
+    // Publica solo si pasa la auditoría automática (ver auditArticle); si
+    // no, se queda como borrador para revisión manual desde /admin.
+    status: poolAudit.ok ? "publicado" : "borrador",
     sourceName: pick.sourceName,
     sourceUrl: pick.sourceUrl,
     readingMinutes: pick.readingMinutes,
