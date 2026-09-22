@@ -85,6 +85,39 @@ export default function ShortcodeRenderer({ content }: { content: string }) {
           );
         }
 
+        // Lista con guiones ("- item" en cada línea, sin línea en blanco
+        // entre ellas): el generador de contenido las produce a menudo para
+        // que se puedan escanear rápido, pero sin este caso especial caían
+        // todas en el <p> genérico de abajo como una sola frase corrida con
+        // los guiones pegados.
+        const lines = trimmed.split("\n").map((l) => l.trim());
+        if (lines.length > 1 && lines.every((l) => /^[-•]\s+/.test(l))) {
+          return (
+            <ul
+              key={i}
+              className="mb-5 list-disc space-y-1.5 pl-5 text-[1.05rem] leading-7 text-sumi/90 marker:text-aka"
+            >
+              {lines.map((line, j) => (
+                <li key={j}>{line.replace(/^[-•]\s+/, "")}</li>
+              ))}
+            </ul>
+          );
+        }
+
+        // Lista numerada ("1. item", "2. item"...), mismo caso.
+        if (lines.length > 1 && lines.every((l) => /^\d+[.)]\s+/.test(l))) {
+          return (
+            <ol
+              key={i}
+              className="mb-5 list-decimal space-y-1.5 pl-5 text-[1.05rem] leading-7 text-sumi/90 marker:font-semibold marker:text-aka"
+            >
+              {lines.map((line, j) => (
+                <li key={j}>{line.replace(/^\d+[.)]\s+/, "")}</li>
+              ))}
+            </ol>
+          );
+        }
+
         return (
           <p key={i} className="mb-5 text-[1.05rem] leading-8 text-sumi/90">
             {trimmed}
