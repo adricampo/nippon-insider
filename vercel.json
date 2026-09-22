@@ -3,9 +3,16 @@
   "outputDirectory": "dist/public",
   "functions": {
     "api/index.ts": {
-      "includeFiles": "dist/public/**"
+      "includeFiles": "dist/public/**",
+      "maxDuration": 60
     }
   },
+  "crons": [
+    {
+      "path": "/api/cron/generate-post",
+      "schedule": "0 8 * * 1"
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
